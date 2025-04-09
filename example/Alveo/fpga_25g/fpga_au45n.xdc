@@ -1,4 +1,4 @@
-# XDC constraints for the Xilinx Alveo U50 board
+# XDC constraints for the Xilinx Alveo U45 board
 # part: xcu26-vsva1365-2LV-e
 
 # General configuration
@@ -26,25 +26,32 @@ set_operating_conditions -design_power_budget 160
 #create_clock -period 10 -name clk_100mhz_1 [get_ports clk_100mhz_1_p]
 
 # LEDs
-#set_property -dict {LOC E18 IOSTANDARD LVCMOS18 SLEW SLOW DRIVE 8} [get_ports qsfp_led_act]
-#set_property -dict {LOC E16 IOSTANDARD LVCMOS18 SLEW SLOW DRIVE 8} [get_ports qsfp_led_stat_g]
-#set_property -dict {LOC F17 IOSTANDARD LVCMOS18 SLEW SLOW DRIVE 8} [get_ports qsfp_led_stat_y]
+set_property -dict {LOC AM23 IOSTANDARD LVCMOS18 SLEW SLOW DRIVE 8} [get_ports qsfp_led_act[0]]
+set_property -dict {LOC AM22 IOSTANDARD LVCMOS18 SLEW SLOW DRIVE 8} [get_ports qsfp_led_stat_g[0]]
+set_property -dict {LOC AN23 IOSTANDARD LVCMOS18 SLEW SLOW DRIVE 8} [get_ports qsfp_led_stat_y[0]]
 
-#set_false_path -to [get_ports {qsfp_led_act qsfp_led_stat_g qsfp_led_stat_y}]
-#set_output_delay 0 [get_ports {qsfp_led_act qsfp_led_stat_g qsfp_led_stat_y}]
+set_false_path -to [get_ports {qsfp_led_act[0] qsfp_led_stat_g[0] qsfp_led_stat_y[0]}]
+set_output_delay 0 [get_ports {qsfp_led_act[0] qsfp_led_stat_g[0] qsfp_led_stat_y[0]}]
+
+set_property -dict {LOC AJ25 IOSTANDARD LVCMOS18 SLEW SLOW DRIVE 8} [get_ports qsfp_led_act[1]]
+set_property -dict {LOC AH25 IOSTANDARD LVCMOS18 SLEW SLOW DRIVE 8} [get_ports qsfp_led_stat_g[1]]
+set_property -dict {LOC AN24 IOSTANDARD LVCMOS18 SLEW SLOW DRIVE 8} [get_ports qsfp_led_stat_y[1]]
+
+set_false_path -to [get_ports {qsfp_led_act[1] qsfp_led_stat_g[1] qsfp_led_stat_y[1]}]
+set_output_delay 0 [get_ports {qsfp_led_act[1] qsfp_led_stat_g[1] qsfp_led_stat_y[1]}]
 
 # UART
-#set_property -dict {LOC BE26 IOSTANDARD LVCMOS18 SLEW SLOW DRIVE 8} [get_ports usb_uart0_txd]
-#set_property -dict {LOC BF26 IOSTANDARD LVCMOS18} [get_ports usb_uart0_rxd]
-#set_property -dict {LOC A17  IOSTANDARD LVCMOS18 SLEW SLOW DRIVE 8} [get_ports usb_uart1_txd]
-#set_property -dict {LOC B15  IOSTANDARD LVCMOS18} [get_ports usb_uart1_rxd]
-#set_property -dict {LOC A19  IOSTANDARD LVCMOS18 SLEW SLOW DRIVE 8} [get_ports usb_uart2_txd]
-#set_property -dict {LOC A18  IOSTANDARD LVCMOS18} [get_ports usb_uart2_rxd]
+set_property -dict {LOC AJ21 IOSTANDARD LVCMOS18 SLEW SLOW DRIVE 8} [get_ports uart_txd[0]]
+set_property -dict {LOC AK21 IOSTANDARD LVCMOS18} [get_ports uart_rxd[0]]
+set_property -dict {LOC AK16  IOSTANDARD LVCMOS18 SLEW SLOW DRIVE 8} [get_ports uart_txd[1]]
+set_property -dict {LOC AK17  IOSTANDARD LVCMOS18} [get_ports uart_rxd[1]]
+set_property -dict {LOC AP24  IOSTANDARD LVCMOS18 SLEW SLOW DRIVE 8} [get_ports uart_txd[2]]
+set_property -dict {LOC AR24  IOSTANDARD LVCMOS18} [get_ports uart_rxd[2]]
 
-#set_false_path -to [get_ports {usb_uart0_txd usb_uart1_txd usb_uart2_txd}]
-#set_output_delay 0 [get_ports {usb_uart0_txd usb_uart1_txd usb_uart2_txd}]
-#set_false_path -from [get_ports {usb_uart0_rxd usb_uart1_rxd usb_uart2_rxd}]
-#set_input_delay 0 [get_ports {usb_uart0_rxd usb_uart1_rxd usb_uart2_rxd}]
+set_false_path -to [get_ports {uart_txd[0] uart_txd[1] uart_txd[2]}]
+set_output_delay 0 [get_ports {uart_txd[0] uart_txd[1] uart_txd[2]}]
+set_false_path -from [get_ports {uart_rxd[0] uart_rxd[1] uart_rxd[2]}]
+set_input_delay 0 [get_ports {uart_rxd[0] uart_rxd[1] uart_rxd[2]}]
 
 # BMC
 #set_property -dict {LOC C16  IOSTANDARD LVCMOS18 SLEW SLOW DRIVE 4} [get_ports {msp_gpio[0]}]
@@ -214,30 +221,3 @@ create_clock -period 6.206 -name qsfp1_mgt_refclk_0 [get_ports qsfp1_mgt_refclk_
 
 #set_false_path -from [get_ports {pcie_reset_n}]
 #set_input_delay 0 [get_ports {pcie_reset_n}]
-
-set_property IOSTANDARD LVCMOS18 [get_ports {qsfp_led_act[0]}]
-set_property IOSTANDARD LVCMOS18 [get_ports {qsfp_led_stat_g[0]}]
-set_property IOSTANDARD LVCMOS18 [get_ports {qsfp_led_stat_y[0]}]
-set_property PACKAGE_PIN AM23 [get_ports {qsfp_led_act[0]}]
-set_property PACKAGE_PIN AM22 [get_ports {qsfp_led_stat_g[0]}]
-set_property PACKAGE_PIN AN23 [get_ports {qsfp_led_stat_y[0]}]
-set_property IOSTANDARD LVCMOS18 [get_ports {qsfp_led_act[1]}]
-set_property IOSTANDARD LVCMOS18 [get_ports {qsfp_led_stat_g[1]}]
-set_property IOSTANDARD LVCMOS18 [get_ports {qsfp_led_stat_y[1]}]
-set_property PACKAGE_PIN AJ25 [get_ports {qsfp_led_act[1]}]
-set_property PACKAGE_PIN AH25 [get_ports {qsfp_led_stat_g[1]}]
-set_property PACKAGE_PIN AN24 [get_ports {qsfp_led_stat_y[1]}]
-
-
-set_property IOSTANDARD LVCMOS18 [get_ports {uart_rxd[2]}]
-set_property IOSTANDARD LVCMOS18 [get_ports {uart_rxd[1]}]
-set_property IOSTANDARD LVCMOS18 [get_ports {uart_rxd[0]}]
-set_property IOSTANDARD LVCMOS18 [get_ports {uart_txd[2]}]
-set_property IOSTANDARD LVCMOS18 [get_ports {uart_txd[1]}]
-set_property IOSTANDARD LVCMOS18 [get_ports {uart_txd[0]}]
-set_property PACKAGE_PIN AK21 [get_ports {uart_rxd[0]}]
-set_property PACKAGE_PIN AJ21 [get_ports {uart_txd[0]}]
-set_property PACKAGE_PIN AK17 [get_ports {uart_rxd[1]}]
-set_property PACKAGE_PIN AK16 [get_ports {uart_txd[1]}]
-set_property PACKAGE_PIN AR24 [get_ports {uart_rxd[2]}]
-set_property PACKAGE_PIN AP24 [get_ports {uart_txd[2]}]
