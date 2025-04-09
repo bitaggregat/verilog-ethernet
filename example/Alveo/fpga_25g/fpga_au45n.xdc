@@ -64,30 +64,6 @@ set_input_delay 0 [get_ports {uart_rxd[0] uart_rxd[1] uart_rxd[2]}]
 #set_false_path -from [get_ports {msp_gpio[*] msp_uart_rxd}]
 #set_input_delay 0 [get_ports {msp_gpio[*] msp_uart_rxd}]
 
-# SI5394 (SI5394B-A10605-GM)
-# I2C address 0x68
-# IN0: 161.1328125 MHz from qsfp_recclk
-# OUT0: 161.1328125 MHz to qsfp_mgt_refclk_0
-# OUT2: 322.265625 MHz to qsfp_mgt_refclk_1
-# OUT3: 100 MHz to clk_100mhz_0, clk_100mhz_1, pcie_refclk_2, pcie_refclk_3
-#set_property -dict {LOC F20 IOSTANDARD LVCMOS18 SLEW SLOW DRIVE 8} [get_ports si5394_rst_b]
-#set_property -dict {LOC H18 IOSTANDARD LVCMOS18 PULLUP true} [get_ports si5394_int_b]
-#set_property -dict {LOC G19 IOSTANDARD LVCMOS18 PULLUP true} [get_ports si5394_lol_b]
-#set_property -dict {LOC H19 IOSTANDARD LVCMOS18 PULLUP true} [get_ports si5394_los_b]
-#set_property -dict {LOC J16 IOSTANDARD LVCMOS18 SLEW SLOW DRIVE 8 PULLUP true} [get_ports si5394_i2c_sda]
-#set_property -dict {LOC L19 IOSTANDARD LVCMOS18 SLEW SLOW DRIVE 8 PULLUP true} [get_ports si5394_i2c_scl]
-
-#set_false_path -to [get_ports {si5394_rst_b}]
-#set_output_delay 0 [get_ports {si5394_rst_b}]
-#set_false_path -from [get_ports {si5394_int_b si5394_lol_b si5394_los_b}]
-#set_input_delay 0 [get_ports {si5394_int_b si5394_lol_b si5394_los_b}]
-
-#set_false_path -to [get_ports {si5394_i2c_sda si5394_i2c_scl}]
-#set_output_delay 0 [get_ports {si5394_i2c_sda si5394_i2c_scl}]
-#set_false_path -from [get_ports {si5394_i2c_sda si5394_i2c_scl}]
-#set_input_delay 0 [get_ports {si5394_i2c_sda si5394_i2c_scl}]
-
-
 # QSFP56 Interface (GTM) @QSFP #0 Connector
 #set_property -dict {LOC A13 } [get_ports qsfp0_rx_p[0]] ;# MGTYRXP0_234 GTM_DUAL_X0Y1 / GTM_REFCLK_X0Y1
 #set_property -dict {LOC A12 } [get_ports qsfp0_rx_n[0]] ;# MGTYRXN0_234 GTM_DUAL_X0Y1 / GTM_REFCLK_X0Y1
